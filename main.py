@@ -38,7 +38,8 @@ class SmokeParticle:
 
 
     def draw(self):
-        draw_rect_alpha(screen, (100, 100, 100, 50), Rect(self.x, self.y, 40, 40))
+        alpha = 100 * (self.lifeTime - time.time() + self.startTime) / self.lifeTime
+        draw_rect_alpha(screen, (100, 100, 100, alpha), Rect(self.x, self.y, 40, 40))
 
 def draw_rect_alpha(surface, color, rect):
     shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
