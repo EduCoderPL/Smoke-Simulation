@@ -21,6 +21,8 @@ class SmokeParticle:
         self.scale = 1
         self.angle = 0
 
+        self.size = 20
+
         self.lifeTime = lifeTime
         self.startTime = time.time()
         SmokeParticle.list.append(self)
@@ -32,6 +34,8 @@ class SmokeParticle:
         self.x += self.velX
         self.y += self.velY
 
+        self.size += 1
+
         if time.time() - self.startTime > self.lifeTime:
             SmokeParticle.list.remove(self)
             del self
@@ -39,7 +43,7 @@ class SmokeParticle:
 
     def draw(self):
         alpha = 100 * (self.lifeTime - time.time() + self.startTime) / self.lifeTime
-        draw_rect_alpha(screen, (100, 100, 100, alpha), Rect(self.x, self.y, 40, 40))
+        draw_rect_alpha(screen, (100, 100, 100, alpha), Rect(self.x, self.y, self.size, self.size))
 
 def draw_rect_alpha(surface, color, rect):
     shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
